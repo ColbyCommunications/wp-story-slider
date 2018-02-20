@@ -1,8 +1,8 @@
 {
   "name": "wp-story-slider",
-  "version": "1.0.5",
+  "version": "1.0.1",
   "description":
-    "A React component displaying search results from a WordPress REST endpoint.",
+    "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
   "main": "src/js",
   "author": "John Watkins <john.watkins@colby.edu>",
   "license": "MIT",
@@ -36,7 +36,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-relay": "^0.0.20",
-    "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "stylelint": "^8.4.0",
