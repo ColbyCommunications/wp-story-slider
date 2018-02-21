@@ -10428,7 +10428,7 @@ var StorySlider = function (_React$Component) {
                   posts = _context.sent;
 
 
-                  _this.setState({ posts: posts, postsWithUnfetchedMedia: posts }, resolve);
+                  _this.setState({ posts: posts }, resolve);
 
                 case 7:
                 case 'end':
@@ -10442,18 +10442,6 @@ var StorySlider = function (_React$Component) {
           return _ref2.apply(this, arguments);
         };
       }());
-    };
-
-    _this.getNextUnfetchedMediaPost = function () {
-      return new Promise(function (resolve) {
-        var postsWithUnfetchedMedia = _this.state.postsWithUnfetchedMedia.map(function (post) {
-          return post;
-        });
-        var post = postsWithUnfetchedMedia.shift();
-        _this.setState({ postsWithUnfetchedMedia: postsWithUnfetchedMedia }, function () {
-          resolve(post);
-        });
-      });
     };
 
     _this.render = function () {

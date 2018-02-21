@@ -147,18 +147,7 @@ class StorySlider extends React.Component {
       const response = await fetch(`${postsEndpoint}?per_page=${totalPosts}`);
       const posts = await response.json();
 
-      this.setState({ posts, postsWithUnfetchedMedia: posts }, resolve);
-    });
-
-  getNextUnfetchedMediaPost = () =>
-    new Promise(resolve => {
-      const postsWithUnfetchedMedia = this.state.postsWithUnfetchedMedia.map(
-        post => post
-      );
-      const post = postsWithUnfetchedMedia.shift();
-      this.setState({ postsWithUnfetchedMedia }, () => {
-        resolve(post);
-      });
+      this.setState({ posts }, resolve);
     });
 
   /**
