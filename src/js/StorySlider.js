@@ -150,9 +150,6 @@ class StorySlider extends React.Component {
       this.setState({ posts }, resolve);
     });
 
-  /**
-   * Walks through posts and fetch featured media one at a time.
-   */
   async fetchMedia() {
     const ids = this.state.posts
       .filter(post => post.featured_media)

@@ -10511,11 +10511,6 @@ var StorySlider = function (_React$Component) {
     }()
   }, {
     key: 'fetchMedia',
-
-
-    /**
-     * Walks through posts and fetch featured media one at a time.
-     */
     value: function () {
       var _ref6 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
         var ids, url, response, mediaArray, media;
