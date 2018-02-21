@@ -1,8 +1,7 @@
 {
   "name": "wp-story-slider",
-  "version": "1.0.1",
-  "description":
-    "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
+  "version": "1.0.2",
+  "description": "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
   "main": "src/js",
   "author": "John Watkins <john.watkins@colby.edu>",
   "license": "MIT",
@@ -14,8 +13,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "start:wp": "webpack -w --config webpack.build.config.babel.js",
-    "build":
-      "webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js",
+    "build": "webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js",
     "lint": "eslint src/js",
     "stylelint": "stylelint src/js",
     "prepare": "npm run build",
