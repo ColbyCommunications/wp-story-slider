@@ -1,0 +1,31 @@
+{
+  "name": "colbycomms/wp-story-slider",
+  "description":
+    "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
+  "type": "library",
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.2",
+    "wp-coding-standards/wpcs": "0.14.0"
+  },
+  "authors": [
+    {
+      "name": "John Watkins",
+      "email": "john.watkins@colby.edu"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "ColbyComms\\StorySlider\\": "story-slider/"
+    },
+    "files": ["story-slider/index.php"]
+  },
+  "scripts": {
+    "phpcbf": "phpcbf --extensions=php",
+    "lint": "phpcs --extensions=php -s",
+    "test": "composer lint"
+  }
+}
