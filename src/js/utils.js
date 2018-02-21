@@ -16,3 +16,31 @@ export function removeTroublesomeArrowProps(props) {
 
   return fixedProps;
 }
+
+const MEDIA_CACHE = {};
+export function fetchMedia({ endpoint, id }) {
+  return new Promise(async resolve => {
+    const url = `${endpoint}/${id}`.replace(`//${id}`, `/${id}`);
+
+    if (url in MEDIA_CACHE) {
+      resolve(MEDIA_CACHE(url));
+      return;
+    }
+
+    let response;
+    try {
+      response = await fetch(url);
+    } catch (e) {
+      resolve(null);
+      return;
+    }
+
+    if (response.status !== 200) {
+      resolve(null);
+      return;
+    }
+
+    const media = await response.json();
+    resolve(media);
+  });
+}

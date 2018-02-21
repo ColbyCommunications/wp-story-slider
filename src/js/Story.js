@@ -80,7 +80,7 @@ const Image = ({ media = {}, mediaSize, mediaBackupSize, title }) => {
         src={image.source_url}
         width={image.width}
         height={image.height}
-        alt={rendered}
+        alt={title.rendered}
       />
     );
   } catch (e) {
