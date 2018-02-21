@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack -p",
+    "build": "webpack",
     "lint": "eslint src/js",
     "stylelint": "stylelint src/js",
     "prepare": "npm run build",
