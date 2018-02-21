@@ -132,15 +132,13 @@ class StorySlider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { posts: [], media: {} };
+    this.state = { posts: [], media: {}, mediaFetched: false };
   }
 
   async componentDidMount() {
     await this.fetchPosts();
     if (this.props.mediaEndpoint) {
-      this.fetchMedia(
-        this.state.posts.filter(post => post.featured_media !== 0)
-      );
+      this.fetchMedia();
     }
   }
 
@@ -149,51 +147,49 @@ class StorySlider extends React.Component {
       const response = await fetch(`${postsEndpoint}?per_page=${totalPosts}`);
       const posts = await response.json();
 
-      this.setState({ posts }, resolve);
+      this.setState({ posts, postsWithUnfetchedMedia: posts }, resolve);
+    });
+
+  getNextUnfetchedMediaPost = () =>
+    new Promise(resolve => {
+      const postsWithUnfetchedMedia = this.state.postsWithUnfetchedMedia.map(
+        post => post
+      );
+      const post = postsWithUnfetchedMedia.shift();
+      this.setState({ postsWithUnfetchedMedia }, () => {
+        resolve(post);
+      });
     });
 
   /**
    * Walks through posts and fetch featured media one at a time.
-   *
-   * @param {Array} posts
    */
-  async fetchMedia(posts) {
-    if (!posts.length) {
-      return;
-    }
+  async fetchMedia() {
+    const ids = this.state.posts
+      .filter(post => post.featured_media)
+      .map(post => post.featured_media)
+      .join(',');
 
-    const { featured_media } = posts.shift();
+    const url = `${this.props.mediaEndpoint}/?include=${ids}&per_page=${
+      this.props.totalPosts
+    }`.replace('//?', '/?');
 
-    if (this.state.media[featured_media]) {
-      this.fetchMedia(posts);
-      return;
-    }
+    const response = await fetch(url);
+    const mediaArray = await response.json();
 
-    const response = await fetch(
-      `${this.props.mediaEndpoint}/${featured_media}`.replace(
-        `//${featured_media}`,
-        `/${featured_media}`
-      )
+    const media = mediaArray.reduce(
+      (output, item) => Object.assign({}, output, { [item.id]: item }),
+      {}
     );
-    if (response.status !== 200) {
-      this.fetchMedia(posts);
-      return;
-    }
-    const mediaObject = await response.json();
-    const media = Object.assign({}, this.state.media, {
-      [featured_media]: mediaObject,
-    });
 
-    this.setState({ media }, () => {
-      this.fetchMedia(posts);
-    });
+    this.setState({ media, mediaFetched: true });
   }
 
   render = (
-    { mediaSize, mediaBackupSize, sliderSettings } = this.props,
-    { posts, media } = this.state
+    { mediaSize, mediaBackupSize, sliderSettings, mediaEndpoint } = this.props,
+    { posts, media, mediaFetched } = this.state
   ) =>
-    posts.length === 0 ? null : (
+    mediaFetched === false ? null : (
       <StyledSlider {...Object.assign({}, SLIDER_SETTINGS, sliderSettings)}>
         {posts.map(post => (
           <StyledStoryContainer key={post.id}>
@@ -202,6 +198,7 @@ class StorySlider extends React.Component {
               media={media[post.featured_media]}
               mediaSize={mediaSize}
               mediaBackupSize={mediaBackupSize}
+              mediaEndpoint={mediaEndpoint}
             />
           </StyledStoryContainer>
         ))}
