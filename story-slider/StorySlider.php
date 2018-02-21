@@ -16,7 +16,7 @@ class StorySlider {
 	 *
 	 * @var bool
 	 */
-	const PROD = true ;
+	const PROD = false;
 
 	/**
 	 * Plugin text domain.
@@ -55,7 +55,7 @@ class StorySlider {
 
 	/**
 	 * Filter for whether to enqueue the plugin's script.
-	 * 
+	 *
 	 * @var string
 	 */
 	const ENQUEUE_SCRIPT_FILTER = self::FILTER_NAMESPACE . 'enqueue_script';

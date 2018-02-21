@@ -7,10 +7,6 @@
  * @package colbycomms/wp-story-slider
  */
 
-register_shutdown_function( function() {
-    print_r( error_get_last() );
-});
-
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 }

@@ -6,7 +6,7 @@ const main = () => {
   const PROD = process.argv.includes('-p');
   const min = PROD ? '.min' : '';
   const entry = {
-    [packageJson.name]: './src/js/index.js',
+    [packageJson.name]: './src/js/loadFromHTML.js',
   };
   const filename = `[name]${min}.js`;
 
