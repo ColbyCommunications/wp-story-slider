@@ -139,13 +139,20 @@ class StorySlider extends React.Component {
     await this.fetchPosts();
     if (this.props.mediaEndpoint) {
       this.fetchMedia();
+    } else {
+      this.setState({ mediaFetched: true });
     }
   }
 
   fetchPosts = ({ totalPosts, postsEndpoint } = this.props) =>
     new Promise(async resolve => {
-      const response = await fetch(`${postsEndpoint}?per_page=${totalPosts}`);
-      const posts = await response.json();
+      let response, posts;
+      try {
+        response = await fetch(`${postsEndpoint}?per_page=${totalPosts}`);
+        posts = await response.json();
+      } catch (e) {
+        return;
+      }
 
       this.setState({ posts }, resolve);
     });
@@ -174,8 +181,9 @@ class StorySlider extends React.Component {
   render = (
     { mediaSize, mediaBackupSize, sliderSettings, mediaEndpoint } = this.props,
     { posts, media, mediaFetched } = this.state
-  ) =>
-    mediaFetched === false ? null : (
+  ) => {
+    console.log(this.state);
+    return mediaFetched === false ? null : (
       <StyledSlider {...Object.assign({}, SLIDER_SETTINGS, sliderSettings)}>
         {posts.map(post => (
           <StyledStoryContainer key={post.id}>
@@ -190,6 +198,7 @@ class StorySlider extends React.Component {
         ))}
       </StyledSlider>
     );
+  };
 }
 
 export default StorySlider;

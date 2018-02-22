@@ -1,0 +1,5 @@
+/* stylelint-disable */
+
+[data-type="colbycomms/story-slider"].editor-block-list__block {
+    max-width: none;
+}
