@@ -63,13 +63,14 @@ class StorySlider {
 	/**
 	 * The plugin's shortcode tag.
 	 */
-	const SHORTCODE_TAG = 'story-slider';
+	const BLOCK_TAG = 'story-slider';
 
 	/**
 	 * Add hooks.
 	 */
 	public function __construct() {
 		add_action( 'init', [ __CLASS__, 'register_shortcode' ] );
+		add_action( 'init', [ __CLASS__, 'register_block' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_script' ] );
 		add_filter( 'template_redirect', [ __CLASS__, 'maybe_disable_script' ] );
 	}
@@ -78,7 +79,39 @@ class StorySlider {
 	 * Adds the shortcode.
 	 */
 	public static function register_shortcode() {
-		add_shortcode( self::SHORTCODE_TAG, [ \ColbyComms\StorySlider\Block::class, 'render' ] );
+		add_shortcode( self::BLOCK_TAG, [ \ColbyComms\StorySlider\Block::class, 'render' ] );
+	}
+
+	/**
+	 * Adds the editor block.
+	 */
+	public static function register_block() {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		$min  = self::PROD === true ? '.min' : '';
+		$dist = self::get_dist_directory();
+
+		wp_register_style(
+			self::TEXT_DOMAIN . '-editor',
+			"$dist/" . self::TEXT_DOMAIN . "-editor$min.css",
+			['wp-edit-blocks']
+		);
+
+		wp_register_script(
+			self::TEXT_DOMAIN . '-editor',
+			"$dist/" . self::TEXT_DOMAIN . "-editor$min.js",
+			[ 'wp-blocks', 'wp-element' ]
+		);
+
+		register_block_type(
+			self::VENDOR . '/' . self::BLOCK_TAG,
+			[
+				'editor_script' => self::TEXT_DOMAIN . '-editor',
+				'editor_style' => self::TEXT_DOMAIN . '-editor',
+			]
+		);
 	}
 
 	/**
@@ -115,7 +148,11 @@ class StorySlider {
 			return;
 		}
 
-		if ( has_shortcode( $post->post_content, self::SHORTCODE_TAG ) ) {
+		if ( strpos( $post->post_content, 'data-story-slider' ) !== false ) {
+			return;
+		}
+
+		if ( has_shortcode( $post->post_content, self::BLOCK_TAG ) ) {
 			return;
 		}
 
