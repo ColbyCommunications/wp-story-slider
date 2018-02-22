@@ -1,3 +1,4 @@
+import React from 'react';
 import StorySlider from '../StorySlider';
 import styled from 'styled-components';
 
@@ -6,8 +7,8 @@ const StyledInputLabel = styled.label`
   margin-bottom: 0.25rem;
 
   button {
-    margin-top: 0.25rem;
     display: block;
+    margin-top: 0.25rem;
   }
 
   input {
@@ -17,13 +18,13 @@ const StyledInputLabel = styled.label`
 `;
 
 const StyledPlaceholderBlock = styled.div`
-  background: #214280;
   padding: 1.5rem;
   color: white;
   text-align: center;
+  background: #214280;
 `;
 
-const { registerBlockType, UrlInputButton, InspectorControls } = wp.blocks;
+const { registerBlockType, InspectorControls } = wp.blocks;
 
 registerBlockType('colbycomms/story-slider', {
   title: 'Story Slider',

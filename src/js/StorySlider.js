@@ -182,7 +182,6 @@ class StorySlider extends React.Component {
     { mediaSize, mediaBackupSize, sliderSettings, mediaEndpoint } = this.props,
     { posts, media, mediaFetched } = this.state
   ) => {
-    console.log(this.state);
     return mediaFetched === false ? null : (
       <StyledSlider {...Object.assign({}, SLIDER_SETTINGS, sliderSettings)}>
         {posts.map(post => (
