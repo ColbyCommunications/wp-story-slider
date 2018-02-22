@@ -47,7 +47,7 @@ registerBlockType('colbycomms/story-slider', {
   edit({ attributes, setAttributes, isSelected }) {
     const { postsEndpoint, loadInEditor, mediaEndpoint } = attributes;
 
-    const controls = (
+    const controls = isSelected && (
       <InspectorControls key="controls">
         <StyledInputLabel>
           Enter the REST endpoint for posts.

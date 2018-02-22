@@ -10459,7 +10459,6 @@ var StorySlider = function (_React$Component) {
           media = _ref4.media,
           mediaFetched = _ref4.mediaFetched;
 
-      console.log(_this.state);
       return mediaFetched === false ? null : _react2.default.createElement(
         StyledSlider,
         Object.assign({}, SLIDER_SETTINGS, sliderSettings),
