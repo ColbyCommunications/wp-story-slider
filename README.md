@@ -52,7 +52,7 @@ ReactDOM.render(<StorySlider postsEndpoint={postsEndpoint} mediaEndpoint={mediaE
 
 A WordPress REST endpoint to query the most recent posts from. Custom endpoints need to handle the `per_page` REST parameter.
 
-##### `postsEndpoint` {string} **default = null**
+##### `mediaEndpoint` {string} **default = null**
 
 A WordPress media endpoint. If the prop is not set, no media will be shown. Custom endpoints need to support the `include` and `per_page` REST parameters.
 
