@@ -12,6 +12,7 @@ const StyledArrow = styled.button`
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
+  padding: 0;
   cursor: pointer;
   background: rgba(209, 65, 36, 0.9);
   border-radius: 2rem;
