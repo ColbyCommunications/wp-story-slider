@@ -23,17 +23,7 @@ const main = () => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['react', 'env', 'stage-0'],
-              plugins: [
-                [
-                  'transform-runtime',
-                  {
-                    helpers: false,
-                    polyfill: false,
-                    regenerator: true,
-                  },
-                ],
-              ],
+              babelrc: true,
             },
           },
         },

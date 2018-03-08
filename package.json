@@ -1,7 +1,8 @@
 {
   "name": "wp-story-slider",
   "version": "1.0.2",
-  "description": "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
+  "description":
+    "A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint.",
   "main": "src/js",
   "author": "John Watkins <john.watkins@colby.edu>",
   "license": "MIT",
@@ -14,7 +15,8 @@
     "start": "webpack-dev-server",
     "start:wp": "webpack -w --config webpack.build.config.babel.js",
     "start:editor": "webpack -w --config webpack.editor.config.babel.js",
-    "build": "webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js && webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js",
+    "build":
+      "webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js && webpack --config webpack.build.config.babel.js && webpack -p --config webpack.build.config.babel.js",
     "lint": "eslint src/js",
     "stylelint": "stylelint src/js",
     "prepare": "npm run build",
@@ -29,7 +31,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.14.0",
     "eslint-config-fbjs": "^2.0.1",
