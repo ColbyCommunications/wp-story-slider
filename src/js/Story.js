@@ -13,6 +13,7 @@ const StyledStory = styled.a`
   }
 
   &:hover {
+    color: inherit;
     text-decoration: none;
     opacity: 1;
     transform: scale(1);
@@ -39,11 +40,12 @@ const StyledStoryInner = styled.div`
   flex-direction: column;
   min-width: 0;
   height: 100%;
+  overflow: hidden;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border-radius: 3px;
 
   img {
     width: 100%;
