@@ -147,8 +147,14 @@ class StorySlider extends React.Component {
   fetchPosts = ({ totalPosts, postsEndpoint } = this.props) =>
     new Promise(async resolve => {
       let response, posts;
+
+      const url =
+        postsEndpoint.indexOf('?') === -1
+          ? `${postsEndpoint}?`
+          : `${postsEndpoint}&`;
+
       try {
-        response = await fetch(`${postsEndpoint}?per_page=${totalPosts}`);
+        response = await fetch(`${url}per_page=${totalPosts}`);
         posts = await response.json();
       } catch (e) {
         return;
@@ -162,6 +168,16 @@ class StorySlider extends React.Component {
       .filter(post => post.featured_media)
       .map(post => post.featured_media)
       .join(',');
+
+    if (!ids.length) {
+      this.setState({ mediaFetched: true });
+      return;
+    }
+
+    const mediaEndpoint =
+      this.props.mediaEndpoint.indexOf('?') === -1
+        ? `${this.props.mediaEndpoint}?`
+        : `${this.props.mediaEndpoint}&`;
 
     const url = `${this.props.mediaEndpoint}/?include=${ids}&per_page=${
       this.props.totalPosts

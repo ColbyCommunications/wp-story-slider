@@ -10404,41 +10404,42 @@ var StorySlider = function (_React$Component) {
 
       return new Promise(function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(resolve) {
-          var response, posts;
+          var response, posts, url;
           return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
                   response = void 0, posts = void 0;
-                  _context.prev = 1;
-                  _context.next = 4;
-                  return fetch(postsEndpoint + '?per_page=' + totalPosts);
+                  url = postsEndpoint.indexOf('?') === -1 ? postsEndpoint + '?' : postsEndpoint + '&';
+                  _context.prev = 2;
+                  _context.next = 5;
+                  return fetch(url + 'per_page=' + totalPosts);
 
-                case 4:
+                case 5:
                   response = _context.sent;
-                  _context.next = 7;
+                  _context.next = 8;
                   return response.json();
 
-                case 7:
+                case 8:
                   posts = _context.sent;
-                  _context.next = 13;
+                  _context.next = 14;
                   break;
 
-                case 10:
-                  _context.prev = 10;
-                  _context.t0 = _context['catch'](1);
+                case 11:
+                  _context.prev = 11;
+                  _context.t0 = _context['catch'](2);
                   return _context.abrupt('return');
 
-                case 13:
+                case 14:
 
                   _this.setState({ posts: posts }, resolve);
 
-                case 14:
+                case 15:
                 case 'end':
                   return _context.stop();
               }
             }
-          }, _callee, _this2, [[1, 10]]);
+          }, _callee, _this2, [[2, 11]]);
         }));
 
         return function (_x2) {
@@ -10518,7 +10519,7 @@ var StorySlider = function (_React$Component) {
     key: 'fetchMedia',
     value: function () {
       var _ref6 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-        var ids, url, response, mediaArray, media;
+        var ids, mediaEndpoint, url, response, mediaArray, media;
         return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -10528,16 +10529,27 @@ var StorySlider = function (_React$Component) {
                 }).map(function (post) {
                   return post.featured_media;
                 }).join(',');
-                url = (this.props.mediaEndpoint + '/?include=' + ids + '&per_page=' + this.props.totalPosts).replace('//?', '/?');
-                _context3.next = 4;
-                return fetch(url);
+
+                if (ids.length) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                this.setState({ mediaFetched: true });
+                return _context3.abrupt('return');
 
               case 4:
+                mediaEndpoint = this.props.mediaEndpoint.indexOf('?') === -1 ? this.props.mediaEndpoint + '?' : this.props.mediaEndpoint + '&';
+                url = (this.props.mediaEndpoint + '/?include=' + ids + '&per_page=' + this.props.totalPosts).replace('//?', '/?');
+                _context3.next = 8;
+                return fetch(url);
+
+              case 8:
                 response = _context3.sent;
-                _context3.next = 7;
+                _context3.next = 11;
                 return response.json();
 
-              case 7:
+              case 11:
                 mediaArray = _context3.sent;
                 media = mediaArray.reduce(function (output, item) {
                   return Object.assign({}, output, _defineProperty({}, item.id, item));
@@ -10546,7 +10558,7 @@ var StorySlider = function (_React$Component) {
 
                 this.setState({ media: media, mediaFetched: true });
 
-              case 10:
+              case 14:
               case 'end':
                 return _context3.stop();
             }
@@ -16437,8 +16449,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Story = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  padding: 0;\n  color: black;\n  transition: transform 0.1s ease-out;\n  transform: scale(0.99);\n\n  @media screen and (min-width: 768px) {\n    padding: 0 0.75rem;\n  }\n\n  &:hover {\n    text-decoration: none;\n    opacity: 1;\n    transform: scale(1);\n  }\n\n  h4 {\n    width: 100%;\n    padding: 0.75rem 1.25rem;\n    margin-top: 0;\n    margin-bottom: 0;\n    font-weight: 600;\n    line-height: 1.414;\n    color: white;\n    text-align: center;\n    background: #214280;\n    background: var(--primary, #214280);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.125);\n  }\n'], ['\n  display: block;\n  padding: 0;\n  color: black;\n  transition: transform 0.1s ease-out;\n  transform: scale(0.99);\n\n  @media screen and (min-width: 768px) {\n    padding: 0 0.75rem;\n  }\n\n  &:hover {\n    text-decoration: none;\n    opacity: 1;\n    transform: scale(1);\n  }\n\n  h4 {\n    width: 100%;\n    padding: 0.75rem 1.25rem;\n    margin-top: 0;\n    margin-bottom: 0;\n    font-weight: 600;\n    line-height: 1.414;\n    color: white;\n    text-align: center;\n    background: #214280;\n    background: var(--primary, #214280);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.125);\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  height: 100%;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n\n  img {\n    width: 100%;\n    height: auto;\n    margin: 0 auto;\n  }\n'], ['\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  height: 100%;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n\n  img {\n    width: 100%;\n    height: auto;\n    margin: 0 auto;\n  }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  padding: 0;\n  color: black;\n  transition: transform 0.1s ease-out;\n  transform: scale(0.99);\n\n  @media screen and (min-width: 768px) {\n    padding: 0 0.75rem;\n  }\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n    opacity: 1;\n    transform: scale(1);\n  }\n\n  h4 {\n    width: 100%;\n    padding: 0.75rem 1.25rem;\n    margin-top: 0;\n    margin-bottom: 0;\n    font-weight: 600;\n    line-height: 1.414;\n    color: white;\n    text-align: center;\n    background: #214280;\n    background: var(--primary, #214280);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.125);\n  }\n'], ['\n  display: block;\n  padding: 0;\n  color: black;\n  transition: transform 0.1s ease-out;\n  transform: scale(0.99);\n\n  @media screen and (min-width: 768px) {\n    padding: 0 0.75rem;\n  }\n\n  &:hover {\n    color: inherit;\n    text-decoration: none;\n    opacity: 1;\n    transform: scale(1);\n  }\n\n  h4 {\n    width: 100%;\n    padding: 0.75rem 1.25rem;\n    margin-top: 0;\n    margin-bottom: 0;\n    font-weight: 600;\n    line-height: 1.414;\n    color: white;\n    text-align: center;\n    background: #214280;\n    background: var(--primary, #214280);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.125);\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  height: 100%;\n  overflow: hidden;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 3px;\n\n  img {\n    width: 100%;\n    height: auto;\n    margin: 0 auto;\n  }\n'], ['\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  height: 100%;\n  overflow: hidden;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 3px;\n\n  img {\n    width: 100%;\n    height: auto;\n    margin: 0 auto;\n  }\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  padding: 1.5rem 1rem 0.75rem;\n  font-size: 89.1%;\n\n  p {\n    margin-top: 0;\n  }\n\n  p:empty {\n    display: none;\n  }\n'], ['\n  padding: 1.5rem 1rem 0.75rem;\n  font-size: 89.1%;\n\n  p {\n    margin-top: 0;\n  }\n\n  p:empty {\n    display: none;\n  }\n']);
 
 var _react = __webpack_require__(0);
