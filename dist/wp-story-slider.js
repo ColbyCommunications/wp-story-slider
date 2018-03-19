@@ -10410,7 +10410,7 @@ var StorySlider = function (_React$Component) {
               switch (_context.prev = _context.next) {
                 case 0:
                   response = void 0, posts = void 0;
-                  url = postsEndpoint.indexOf('?') === -1 ? postsEndpoint + '?' : postsEndpoint + '&';
+                  url = (postsEndpoint.indexOf('?') === -1 ? postsEndpoint + '/?' : postsEndpoint + '&').replace('//?', '/?');
                   _context.prev = 2;
                   _context.next = 5;
                   return fetch(url + 'per_page=' + totalPosts);
@@ -10539,8 +10539,8 @@ var StorySlider = function (_React$Component) {
                 return _context3.abrupt('return');
 
               case 4:
-                mediaEndpoint = this.props.mediaEndpoint.indexOf('?') === -1 ? this.props.mediaEndpoint + '?' : this.props.mediaEndpoint + '&';
-                url = (this.props.mediaEndpoint + '/?include=' + ids + '&per_page=' + this.props.totalPosts).replace('//?', '/?');
+                mediaEndpoint = this.props.mediaEndpoint.indexOf('?') === -1 ? this.props.mediaEndpoint + '/?' : this.props.mediaEndpoint + '&';
+                url = (mediaEndpoint + 'include=' + ids + '&per_page=' + this.props.totalPosts).replace('//?', '/?');
                 _context3.next = 8;
                 return fetch(url);
 

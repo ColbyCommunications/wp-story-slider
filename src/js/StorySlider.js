@@ -148,10 +148,10 @@ class StorySlider extends React.Component {
     new Promise(async resolve => {
       let response, posts;
 
-      const url =
-        postsEndpoint.indexOf('?') === -1
-          ? `${postsEndpoint}?`
-          : `${postsEndpoint}&`;
+      const url = (postsEndpoint.indexOf('?') === -1
+        ? `${postsEndpoint}/?`
+        : `${postsEndpoint}&`
+      ).replace('//?', '/?');
 
       try {
         response = await fetch(`${url}per_page=${totalPosts}`);
@@ -176,10 +176,10 @@ class StorySlider extends React.Component {
 
     const mediaEndpoint =
       this.props.mediaEndpoint.indexOf('?') === -1
-        ? `${this.props.mediaEndpoint}?`
+        ? `${this.props.mediaEndpoint}/?`
         : `${this.props.mediaEndpoint}&`;
 
-    const url = `${this.props.mediaEndpoint}/?include=${ids}&per_page=${
+    const url = `${mediaEndpoint}include=${ids}&per_page=${
       this.props.totalPosts
     }`.replace('//?', '/?');
 
