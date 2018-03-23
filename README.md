@@ -1,6 +1,6 @@
 # wp-story-slider
 
-A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint. Includes a shortcode.
+A horizontal slider displaying posts (with featured images and excerpts) from a WordPress REST endpoint. Includes a shortcode and a block for the WordPress 5 editor.
 
 [Demo](https://colbycommunications.github.io/wp-story-slider/demo/).
 
