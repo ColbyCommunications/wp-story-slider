@@ -16,9 +16,9 @@ Or:
 yarn add wp-story-slider
 ```
 
-### WordPress shortcode
+### WordPress shortcode/editor block
 
-Installing through NPM does not make the WordPress shortcode available. The shortcode requires installation through Composer with `composer require colbycomms/wp-story-slider`. Alternatively, clone this repository into your WordPress plugins directory and activate it through the WP admin.
+Installing through NPM does not make the WordPress shortcode or editor block available. They require installation through Composer with `composer require colbycomms/wp-story-slider`. Alternatively, clone this repository into your WordPress plugins directory and activate it through the WP admin.
 
 If this package is installed by either of these means, its compiled Javascript file will load automatically and will hook into the shortcode output. The script can be dequeued -- e.g., if you're using this package as an ES6 module -- with the `colbycomms__story_slider__enqueue_script` WordPress filter. Simply provide a callback to that filter returning `false`, e.g.:
 
@@ -108,3 +108,7 @@ The REST endpoint to retreive posts from.
 ##### `media-endpoint`
 
 The REST endpoint to retreive media from.
+
+### Editor block
+
+The editor block will be available as "Story Slider" where the Gutenberg editor is active. 
